@@ -66,7 +66,7 @@ public class MRJson2CSV extends Configured implements Tool {
                 if (record.isEmpty()) {
                     record = (String) jsonObject.get(field);
                 } else {
-                    record += "," + (String) jsonObject.get(field);
+                    record += "," + jsonObject.get(field).toString();
                 } // if else
             } // while
             
@@ -74,6 +74,18 @@ public class MRJson2CSV extends Configured implements Tool {
         } // map
         
     } // FormatConverter
+    
+    public static class RecordsCombiner extends Reducer<Text, Text, Text, Text> {
+        
+        private final Text commonKey = new Text("record");
+    
+        @Override
+        public void reduce(Text key, Iterable<Text> records, Context context) throws IOException, InterruptedException {
+            for (Text record : records) {
+                context.write(commonKey, record);
+            } // for
+        } // reduce
+    } // RecordsJoiner
 
     public static class RecordsJoiner extends Reducer<Text, Text, NullWritable, Text> {
     
@@ -98,11 +110,15 @@ public class MRJson2CSV extends Configured implements Tool {
         } // if
         
         Configuration conf = new Configuration();
+        conf.addResource(new Path("/etc/hadoop/2.3.6.0-3796/0/core-site.xml"));
+        conf.addResource(new Path("/etc/hadoop/2.3.6.0-3796/0/hdfs-site.xml"));
         Job job = Job.getInstance(conf, "MRJson2CSV");
         job.setJarByClass(MRJson2CSV.class);
         job.setMapperClass(FormatConverter.class);
-        job.setCombinerClass(RecordsJoiner.class);
+        job.setCombinerClass(RecordsCombiner.class);
         job.setReducerClass(RecordsJoiner.class);
+        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputValueClass(Text.class);
         job.setOutputKeyClass(NullWritable.class);
         job.setOutputValueClass(Text.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
