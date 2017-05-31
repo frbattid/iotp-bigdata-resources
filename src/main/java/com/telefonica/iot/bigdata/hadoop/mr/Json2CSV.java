@@ -15,7 +15,7 @@
  *
  * For those usages not covered by the GNU Affero General Public License please contact with iot_support at tid dot es
  */
-package com.telefonica.iot.bigdata.hadoop.apps.mrjson2csv;
+package com.telefonica.iot.bigdata.hadoop.mr;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -40,7 +40,7 @@ import org.json.simple.parser.ParseException;
  *
  * @author frb
  */
-public class MRJson2CSV extends Configured implements Tool {
+public class Json2CSV extends Configured implements Tool {
     
     public static class FormatConverter extends Mapper<Object, Text, Text, Text> {
         
@@ -98,7 +98,7 @@ public class MRJson2CSV extends Configured implements Tool {
     } // RecordsJoiner
 
     public static void main(String[] args) throws Exception {
-        int res = ToolRunner.run(new Configuration(), new MRJson2CSV(), args);
+        int res = ToolRunner.run(new Configuration(), new Json2CSV(), args);
         System.exit(res);
     } // main
     
@@ -109,11 +109,14 @@ public class MRJson2CSV extends Configured implements Tool {
             return -1;
         } // if
         
+        String input = args[0];
+        String output = args[1];
+        
         Configuration conf = new Configuration();
         conf.addResource(new Path("/etc/hadoop/2.3.6.0-3796/0/core-site.xml"));
         conf.addResource(new Path("/etc/hadoop/2.3.6.0-3796/0/hdfs-site.xml"));
-        Job job = Job.getInstance(conf, "MRJson2CSV");
-        job.setJarByClass(MRJson2CSV.class);
+        Job job = Job.getInstance(conf, "Json2CSV");
+        job.setJarByClass(Json2CSV.class);
         job.setMapperClass(FormatConverter.class);
         job.setCombinerClass(RecordsCombiner.class);
         job.setReducerClass(RecordsJoiner.class);
@@ -121,8 +124,8 @@ public class MRJson2CSV extends Configured implements Tool {
         job.setMapOutputValueClass(Text.class);
         job.setOutputKeyClass(NullWritable.class);
         job.setOutputValueClass(Text.class);
-        FileInputFormat.addInputPath(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        FileInputFormat.addInputPath(job, new Path(input));
+        FileOutputFormat.setOutputPath(job, new Path(output));
         return job.waitForCompletion(true) ? 0 : 1;
     } // run
     
@@ -130,10 +133,10 @@ public class MRJson2CSV extends Configured implements Tool {
         System.out.println("Usage:");
         System.out.println();
         System.out.println("hadoop jar \\");
-        System.out.println("   BigDataResource-0.1.0-jar-with-dependencies.jar \\");
-        System.out.println("   com.telefonica.iot.bigdata.hadoop.apps.mrjson2csv \\");
+        System.out.println("   BigDataResource-0.1.0.jar \\");
+        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.Json2CSV \\");
         System.out.println("   <HDFS input dir> \\");
         System.out.println("   <HDFS output dir>");
     } // showUsage
     
-} // MRJson2CSV
+} // Json2CSV
