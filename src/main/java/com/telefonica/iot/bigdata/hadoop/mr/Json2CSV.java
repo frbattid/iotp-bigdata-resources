@@ -17,6 +17,8 @@
  */
 package com.telefonica.iot.bigdata.hadoop.mr;
 
+import com.telefonica.iot.bigdata.hadoop.mr.combiners.RecordsCombiner;
+import com.telefonica.iot.bigdata.hadoop.mr.reducers.RecordsJoiner;
 import java.io.IOException;
 import java.util.Iterator;
 import org.apache.hadoop.conf.Configuration;
@@ -27,7 +29,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -74,28 +75,6 @@ public class Json2CSV extends Configured implements Tool {
         } // map
         
     } // FormatConverter
-    
-    public static class RecordsCombiner extends Reducer<Text, Text, Text, Text> {
-        
-        private final Text commonKey = new Text("record");
-    
-        @Override
-        public void reduce(Text key, Iterable<Text> records, Context context) throws IOException, InterruptedException {
-            for (Text record : records) {
-                context.write(commonKey, record);
-            } // for
-        } // reduce
-    } // RecordsJoiner
-
-    public static class RecordsJoiner extends Reducer<Text, Text, NullWritable, Text> {
-    
-        @Override
-        public void reduce(Text key, Iterable<Text> records, Context context) throws IOException, InterruptedException {
-            for (Text record : records) {
-                context.write(NullWritable.get(), record);
-            } // for
-        } // reduce
-    } // RecordsJoiner
 
     public static void main(String[] args) throws Exception {
         int res = ToolRunner.run(new Configuration(), new Json2CSV(), args);
@@ -133,7 +112,7 @@ public class Json2CSV extends Configured implements Tool {
         System.out.println("Usage:");
         System.out.println();
         System.out.println("hadoop jar \\");
-        System.out.println("   BigDataResource-0.1.0.jar \\");
+        System.out.println("   iotp-bigdata-resources-0.1.0.jar \\");
         System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.Json2CSV \\");
         System.out.println("   <HDFS input dir> \\");
         System.out.println("   <HDFS output dir>");
