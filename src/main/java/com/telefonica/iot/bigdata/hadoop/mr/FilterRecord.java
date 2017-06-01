@@ -17,6 +17,8 @@
  */
 package com.telefonica.iot.bigdata.hadoop.mr;
 
+import com.telefonica.iot.bigdata.hadoop.mr.combiners.RecordsCombiner;
+import com.telefonica.iot.bigdata.hadoop.mr.reducers.RecordsJoiner;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +30,6 @@ import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -46,7 +47,7 @@ public class FilterRecord extends Configured implements Tool {
     public static class Filter extends Mapper<Object, Text, Text, Text> {
         
         private final Text commonKey = new Text("record");
-        private HashMap<String, ArrayList<String[]>> conditions = new HashMap();
+        private final HashMap<String, ArrayList<String[]>> conditions = new HashMap<>();
         
         private void addCondition(String operator, String cond) {
             String[] condParts = cond.split(operator);
@@ -144,31 +145,9 @@ public class FilterRecord extends Configured implements Tool {
         } // map
         
     } // Filter
-    
-    public static class RecordsCombiner extends Reducer<Text, Text, Text, Text> {
-        
-        private final Text commonKey = new Text("record");
-    
-        @Override
-        public void reduce(Text key, Iterable<Text> records, Context context) throws IOException, InterruptedException {
-            for (Text record : records) {
-                context.write(commonKey, record);
-            } // for
-        } // reduce
-    } // RecordsJoiner
 
-    public static class RecordsJoiner extends Reducer<Text, Text, NullWritable, Text> {
-    
-        @Override
-        public void reduce(Text key, Iterable<Text> records, Context context) throws IOException, InterruptedException {
-            for (Text record : records) {
-                context.write(NullWritable.get(), record);
-            } // for
-        } // reduce
-    } // RecordsJoiner
-    
     public static void main(String[] args) throws Exception {
-        int res = ToolRunner.run(new Configuration(), new Json2CSV(), args);
+        int res = ToolRunner.run(new Configuration(), new FilterRecord(), args);
         System.exit(res);
     } // main
     
@@ -181,14 +160,14 @@ public class FilterRecord extends Configured implements Tool {
         
         String input = args[0];
         String output = args[1];
-        String regex = args[2];
+        String query = args[2];
         
         Configuration conf = new Configuration();
         conf.addResource(new Path("/etc/hadoop/2.3.6.0-3796/0/core-site.xml"));
         conf.addResource(new Path("/etc/hadoop/2.3.6.0-3796/0/hdfs-site.xml"));
-        conf.set("QUERY", regex);
+        conf.set("QUERY", query);
         Job job = Job.getInstance(conf, "FilterRecord");
-        job.setJarByClass(Json2CSV.class);
+        job.setJarByClass(FilterRecord.class);
         job.setMapperClass(Filter.class);
         job.setCombinerClass(RecordsCombiner.class);
         job.setReducerClass(RecordsJoiner.class);
@@ -205,8 +184,8 @@ public class FilterRecord extends Configured implements Tool {
         System.out.println("Usage:");
         System.out.println();
         System.out.println("hadoop jar \\");
-        System.out.println("   BigDataResource-0.1.0.jar \\");
-        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.Filter \\");
+        System.out.println("   iotp-bigdata-resources-0.1.0.jar \\");
+        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.FilterRecord \\");
         System.out.println("   <HDFS input dir> \\");
         System.out.println("   <HDFS output dir> \\");
         System.out.println("   <query>");
