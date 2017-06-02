@@ -11,7 +11,7 @@ For the time being, the library only contains analysis jobs written for
 it is expected it contains useful analytical jobs for other big data platforms
 and tools, such as [Apache Spark](https://spark.apache.org/), very soon.
 
-## Build
+## Build
 ### Pre-requisites
 Pre-requisites for building the library are:
 * [Java Development Kit](http://openjdk.java.net/) 7 or higher.
@@ -61,7 +61,7 @@ upload is shown (`curl` tool is used as Http client):
 
 [Top](#iotp-bigdata-resources)
 
-## Usage
+## Usage
 There exists the following MapReduce jobs within the library (fully qualified
 class names, or FQCN, are given):
 * `com.telefonica.iot.bigdata.hadoop.mr.Aggregate`
@@ -187,7 +187,7 @@ MapReduce job is:
 
 [Top](#iotp-bigdata-resources)
 
-### FilterColumn
+### FilterColumn
 Filters fields from Json-like content within HDFS files.
 
 Parameters:
@@ -272,7 +272,7 @@ Then the result of the `FilterRecord` MapReduce job is:
 
 [Top](#iotp-bigdata-resources)
 
-### Json2CSV
+### Json2CSV
 Translates Json-like content within HDFS files into the corresponding CSV
 format.
 
@@ -304,7 +304,7 @@ The result of the `J_son2CSV` MapReduce job is:
 
 [Top](#iotp-bigdata-resources)
 
-## License
+## License
 iotp-bigdata-resources is free software: you can redistribute it and/or modify
 it under the terms of the **GNU Affero General Public License** as published by
 the Free Software Foundation, either version 3 of the License, or (at your
@@ -317,7 +317,7 @@ more details (there is a copy distributed within this repository).
 
 [Top](#iotp-bigdata-resources)
 
-## Author and contact
+## Author and contact
 Author: Francisco Romero Bueno (francisco.romerobueno@telefonica.com)
 
 Contact: iot_support@tid.es
