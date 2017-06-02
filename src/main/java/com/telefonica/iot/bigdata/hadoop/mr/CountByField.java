@@ -25,6 +25,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -42,7 +43,7 @@ import org.json.simple.parser.ParseException;
  */
 public class CountByField extends Configured implements Tool {
     
-    public static class RecordsCounter extends Reducer<Text, Text, Text, IntWritable> {
+    public static class RecordsCounter extends Reducer<Text, Text, NullWritable, Text> {
         
         private String field;
         
@@ -80,10 +81,18 @@ public class CountByField extends Configured implements Tool {
                     } // if else
                 } // if else
             } // for
+            
+            String res = "{";
 
             for (String k : counts.keySet()) {
-                context.write(new Text(k), new IntWritable(counts.get(k)));
+                if (res.equals("{")) {
+                    res += "\"" + k + "\":" + counts.get(k);
+                } else {
+                    res += ",\"" + k + "\":" + counts.get(k);
+                } // if else
             } // for
+            
+            context.write(NullWritable.get(), new Text(res + "}"));
         } // reduce
         
     } // RecordsCounter
@@ -115,8 +124,8 @@ public class CountByField extends Configured implements Tool {
         job.setReducerClass(RecordsCounter.class);
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(Text.class);
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(IntWritable.class);
+        job.setOutputKeyClass(NullWritable.class);
+        job.setOutputValueClass(Text.class);
         FileInputFormat.addInputPath(job, new Path(input));
         FileOutputFormat.setOutputPath(job, new Path(output));
         return job.waitForCompletion(true) ? 0 : 1;

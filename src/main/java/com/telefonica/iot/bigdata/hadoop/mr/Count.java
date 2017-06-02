@@ -39,7 +39,7 @@ import org.apache.hadoop.util.ToolRunner;
  */
 public class Count extends Configured implements Tool {
     
-    public static class RecordsCounter extends Reducer<Text, Text, NullWritable, IntWritable> {
+    public static class RecordsCounter extends Reducer<Text, Text, NullWritable, Text> {
 
         @Override
         public void reduce(Text key, Iterable<Text> records, Context context) throws IOException, InterruptedException {
@@ -49,7 +49,7 @@ public class Count extends Configured implements Tool {
                 count++;
             } // for
 
-            context.write(NullWritable.get(), new IntWritable(count));
+            context.write(NullWritable.get(), new Text("{\"count\":" + count + "}"));
         } // reduce
         
     } // RecordsCounter
@@ -80,7 +80,7 @@ public class Count extends Configured implements Tool {
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(Text.class);
         job.setOutputKeyClass(NullWritable.class);
-        job.setOutputValueClass(IntWritable.class);
+        job.setOutputValueClass(Text.class);
         FileInputFormat.addInputPath(job, new Path(input));
         FileOutputFormat.setOutputPath(job, new Path(output));
         return job.waitForCompletion(true) ? 0 : 1;
