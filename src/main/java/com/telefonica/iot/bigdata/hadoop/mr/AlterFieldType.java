@@ -43,7 +43,7 @@ import org.json.simple.parser.ParseException;
  *
  * @author frb
  */
-public class AlterType extends Configured implements Tool {
+public class AlterFieldType extends Configured implements Tool {
     
     public static class Retyper extends Mapper<Object, Text, Text, Text> {
         
@@ -129,7 +129,7 @@ public class AlterType extends Configured implements Tool {
     } // Retyper
     
     public static void main(String[] args) throws Exception {
-        int res = ToolRunner.run(new Configuration(), new AlterType(), args);
+        int res = ToolRunner.run(new Configuration(), new AlterFieldType(), args);
         System.exit(res);
     } // main
     
@@ -148,8 +148,8 @@ public class AlterType extends Configured implements Tool {
         conf.addResource(new Path("/etc/hadoop/2.3.6.0-3796/0/core-site.xml"));
         conf.addResource(new Path("/etc/hadoop/2.3.6.0-3796/0/hdfs-site.xml"));
         conf.set("NEW_TYPES", newTypes);
-        Job job = Job.getInstance(conf, "AlterType");
-        job.setJarByClass(AlterType.class);
+        Job job = Job.getInstance(conf, "AlterFieldType");
+        job.setJarByClass(AlterFieldType.class);
         job.setMapperClass(Retyper.class);
         job.setCombinerClass(RecordsCombiner.class);
         job.setReducerClass(RecordsJoiner.class);
@@ -167,7 +167,7 @@ public class AlterType extends Configured implements Tool {
         System.out.println();
         System.out.println("hadoop jar \\");
         System.out.println("   iotp-bigdata-resources-0.1.0.jar \\");
-        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.AlterType \\");
+        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.AlterFieldType \\");
         System.out.println("   <HDFS input dir> \\");
         System.out.println("   <HDFS output dir> \\");
         System.out.println("   <columns>");
