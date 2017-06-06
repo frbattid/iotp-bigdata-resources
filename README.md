@@ -135,7 +135,42 @@ The the result of the `Aggregate` MapReduce job is:
 [Top](#iotp-bigdata-resources)
 
 ### AlterFieldName
-To be done.
+Alters the names of the Json fields within HDFS files.
+
+Parameters:
+* HDFS input directory.
+* HDFS output directory (must not exist, it is created by the job).
+* List of name mappings.
+
+The list of name mappings is a collection of pairs containing the old name and the new name (separated by `:`), being the pairs separated by `&`, following this format:
+
+    oldName1:newName1&oldName2:newName2&...&oldNameN:newNameN
+
+For instance, given this HDFS content:
+
+```
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+```
+
+And these name mappings:
+
+    recvTimeTs:ms&recvTime:ts
+
+The the result of the `Aggregate` MapReduce job is:
+
+```
+{"ms":"1495706098","ts":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"ms":"1495706098","ts":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"ms":"1495706357","ts":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"ms":"1495706357","ts":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"ms":"1495706445","ts":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"ms":"1495706445","ts":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+```
 
 [Top](#iotp-bigdata-resources)
 
