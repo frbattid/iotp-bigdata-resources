@@ -64,14 +64,14 @@ upload is shown (`curl` tool is used as Http client):
 ## Usage
 There exists the following MapReduce jobs within the library (fully qualified
 class names, or FQCN, are given):
-* [`com.telefonica.iot.bigdata.hadoop.mr.Aggregate`](Aggregate)
-* [`com.telefonica.iot.bigdata.hadoop.mr.AlterFieldName`](AlterFieldName)
-* [`com.telefonica.iot.bigdata.hadoop.mr.AlterFieldType`](AlterFieldType)
-* [`com.telefonica.iot.bigdata.hadoop.mr.Count`](Count)
-* [`com.telefonica.iot.bigdata.hadoop.mr.CountByField`](CountByField)
-* [`com.telefonica.iot.bigdata.hadoop.mr.FilterColumn`](FilterColumn)
-* [`com.telefonica.iot.bigdata.hadoop.mr.FilterRecord`](FilterRecord)
-* [`com.telefonica.iot.bigdata.hadoop.mr.Json2CSV`](Json2CSV)
+* [`com.telefonica.iot.bigdata.hadoop.mr.Aggregate`](#Aggregate)
+* [`com.telefonica.iot.bigdata.hadoop.mr.AlterFieldName`](#AlterFieldName)
+* [`com.telefonica.iot.bigdata.hadoop.mr.AlterFieldType`](#AlterFieldType)
+* [`com.telefonica.iot.bigdata.hadoop.mr.Count`](#Count)
+* [`com.telefonica.iot.bigdata.hadoop.mr.CountByField`](#CountByField)
+* [`com.telefonica.iot.bigdata.hadoop.mr.FilterColumn`](#FilterColumn)
+* [`com.telefonica.iot.bigdata.hadoop.mr.FilterRecord`](#FilterRecord)
+* [`com.telefonica.iot.bigdata.hadoop.mr.Json2CSV`](#Json2CSV)
 
 Those jobs are fully executable from any Hadoop instance. Just ssh into any node
 of the cluster and run:
