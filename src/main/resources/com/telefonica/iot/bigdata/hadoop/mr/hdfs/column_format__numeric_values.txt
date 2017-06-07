@@ -1,0 +1,6 @@
+{"recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","pressure":89,"pressure_md":[],"temperature":23.1,"temperature_md":[]}
+{"recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","pressure":90,"pressure_md":[],"temperature":24.2,"temperature_md":[]}
+{"recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","pressure":89,"pressure_md":[],"temperature":24.0,"temperature_md":[]}
+{"recvTime":"2017-05-25T10:13:06.3Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","pressure":91,"pressure_md":[],"temperature":22.7,"temperature_md":[]}
+{"recvTime":"2017-05-25T12:58:32.539Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","pressure":88,"pressure_md":[],"temperature":22.0,"temperature_md":[]}
+{"recvTime":"2017-05-25T13:05:12.67Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","pressure":90,"pressure_md":[],"temperature":22.7,"temperature_md":[]}

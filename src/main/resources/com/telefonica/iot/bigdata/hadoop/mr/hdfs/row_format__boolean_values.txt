@@ -1,0 +1,12 @@
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":true,"attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"alarm","attrType":"Boolean","attrValue":false,"attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"alarm","attrType":"Boolean","attrValue":false,"attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":false,"attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"alarm","attrType":"Boolean","attrValue":false,"attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":true,"attrMd":[]}
+{"recvTimeTs":"1495707186","recvTime":"2017-05-25T10:13:06.3Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"alarm","attrType":"Boolean","attrValue":false,"attrMd":[]}
+{"recvTimeTs":"1495707186","recvTime":"2017-05-25T10:13:06.3Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":false,"attrMd":[]}
+{"recvTimeTs":"1495717112","recvTime":"2017-05-25T12:58:32.539Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"alarm","attrType":"Boolean","attrValue":false,"attrMd":[]}
+{"recvTimeTs":"1495717112","recvTime":"2017-05-25T12:58:32.539Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":true,"attrMd":[]}
+{"recvTimeTs":"1495718903","recvTime":"2017-05-25T13:05:12.67Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"alarm","attrType":"Boolean","attrValue":true,"attrMd":[]}
+{"recvTimeTs":"1495718903","recvTime":"2017-05-25T13:05:12.67Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":true,"attrMd":[]}

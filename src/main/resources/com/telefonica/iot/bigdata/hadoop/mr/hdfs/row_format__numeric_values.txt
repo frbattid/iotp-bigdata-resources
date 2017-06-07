@@ -1,0 +1,12 @@
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":23.1,"attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":89,"attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":90,"attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":24.2,"attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":89,"attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":24.0,"attrMd":[]}
+{"recvTimeTs":"1495707186","recvTime":"2017-05-25T10:13:06.3Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":91,"attrMd":[]}
+{"recvTimeTs":"1495707186","recvTime":"2017-05-25T10:13:06.3Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":22.7,"attrMd":[]}
+{"recvTimeTs":"1495717112","recvTime":"2017-05-25T12:58:32.539Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":88,"attrMd":[]}
+{"recvTimeTs":"1495717112","recvTime":"2017-05-25T12:58:32.539Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":22.0,"attrMd":[]}
+{"recvTimeTs":"1495718903","recvTime":"2017-05-25T13:05:12.67Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":90,"attrMd":[]}
+{"recvTimeTs":"1495718903","recvTime":"2017-05-25T13:05:12.67Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":22.7,"attrMd":[]}
