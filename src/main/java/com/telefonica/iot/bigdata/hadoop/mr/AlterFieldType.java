@@ -48,11 +48,11 @@ public class AlterFieldType extends Configured implements Tool {
     public static class Retyper extends Mapper<Object, Text, Text, Text> {
         
         private final Text commonKey = new Text("record");
-        private HashMap<String, String> newTypes;
+        private final HashMap<String, String> newTypes = new HashMap<>();
 
         @Override
         public void setup(Context context) throws IOException, InterruptedException {
-            String newTypesStr = context.getConfiguration().get("COLUMNS", "");
+            String newTypesStr = context.getConfiguration().get("NEW_TYPES", "");
             String[] newTypesStrSplit = newTypesStr.split("&");
             
             for (String newTypeStr : newTypesStrSplit) {
@@ -142,7 +142,7 @@ public class AlterFieldType extends Configured implements Tool {
         
         String input = args[0];
         String output = args[1];
-        String newTypes = args[3];
+        String newTypes = args[2];
         
         Configuration conf = new Configuration();
         conf.addResource(new Path("/etc/hadoop/2.3.6.0-3796/0/core-site.xml"));
@@ -170,7 +170,7 @@ public class AlterFieldType extends Configured implements Tool {
         System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.AlterFieldType \\");
         System.out.println("   <HDFS input dir> \\");
         System.out.println("   <HDFS output dir> \\");
-        System.out.println("   <columns>");
+        System.out.println("   <new types>");
     } // showUsage
     
 } // Numerify
