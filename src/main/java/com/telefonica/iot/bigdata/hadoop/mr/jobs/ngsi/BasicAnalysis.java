@@ -18,6 +18,7 @@
 package com.telefonica.iot.bigdata.hadoop.mr.jobs.ngsi;
 
 import com.telefonica.iot.bigdata.hadoop.mr.mappers.KeyGenerator;
+import com.telefonica.iot.bigdata.utils.NGSIUtils;
 import com.telefonica.iot.bigdata.utils.Utils;
 import java.io.IOException;
 import java.util.Iterator;
@@ -138,11 +139,6 @@ public class BasicAnalysis extends Configured implements Tool {
             } // if else
         } // analyzeRowFormat
         
-        private boolean isAttrValue(String field) {
-            return !field.equals("recvTime") && !field.equals("recvTimeTs") && !field.equals("fiwareServicePath")
-                    && !field.equals("entityId") && !field.equals("entityType") && !field.contains("_md");
-        } // isAttrValue
-        
         private void analyzeColumnFormat(JSONObject jsonRecord, JSONObject jsonAnalysis) {
             if (jsonAnalysis.isEmpty()) {
                 JSONObject analysis = new JSONObject();
@@ -157,7 +153,7 @@ public class BasicAnalysis extends Configured implements Tool {
                 while (it.hasNext()) {
                     String field = (String) it.next();
                     
-                    if (isAttrValue(field)) {
+                    if (NGSIUtils.isAttrValue(field)) {
                         Object attrValue = (Object) jsonRecord.get(field);
                         JSONObject fieldAnalysis = (JSONObject) analysis.get(field);
                         
@@ -178,7 +174,7 @@ public class BasicAnalysis extends Configured implements Tool {
                 while (it.hasNext()) {
                     String field = (String) it.next();
                     
-                    if (isAttrValue(field)) {
+                    if (NGSIUtils.isAttrValue(field)) {
                         Object attrValue = (Object) jsonRecord.get(field);
                         JSONObject fieldAnalysis = (JSONObject) analysis.get(field);
                         
