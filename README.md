@@ -64,14 +64,15 @@ upload is shown (`curl` tool is used as Http client):
 ## Usage
 There exists the following MapReduce jobs within the library (fully qualified
 class names, or FQCN, are given):
-* [`com.telefonica.iot.bigdata.hadoop.mr.Aggregate`](#aggregate)
-* [`com.telefonica.iot.bigdata.hadoop.mr.AlterFieldName`](#alterfieldname)
-* [`com.telefonica.iot.bigdata.hadoop.mr.AlterFieldType`](#alterfieldtype)
-* [`com.telefonica.iot.bigdata.hadoop.mr.Count`](#count)
-* [`com.telefonica.iot.bigdata.hadoop.mr.CountByField`](#countbyfield)
-* [`com.telefonica.iot.bigdata.hadoop.mr.FilterColumn`](#filtercolumn)
-* [`com.telefonica.iot.bigdata.hadoop.mr.FilterRecord`](#filterrecord)
-* [`com.telefonica.iot.bigdata.hadoop.mr.Json2CSV`](#json2csv)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.Aggregate`](#aggregate)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.AlterFieldName`](#alterfieldname)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.AlterFieldType`](#alterfieldtype)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.Count`](#count)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.CountByField`](#countbyfield)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.FilterColumn`](#filtercolumn)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.FilterRecord`](#filterrecord)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.Json2CSV`](#json2csv)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.ngsi.BasicAnalysis`](#basicanalysis)
 
 Those jobs are fully executable from any Hadoop instance. Just ssh into any node
 of the cluster and run:
@@ -326,7 +327,7 @@ For instance, given this HDFS content:
 {"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
 ```
 
-The result of the `J_son2CSV` MapReduce job is:
+The result of the `Json2CSV` MapReduce job is:
 
 ```
 1495706098,2017-05-25T09:54:58.427Z,/sevilla,dev1,device,temperature,Float,23,[]
@@ -335,6 +336,53 @@ The result of the `J_son2CSV` MapReduce job is:
 1495706357,2017-05-25T09:59:17.488Z,/sevilla,dev1,device,temperature,Float,30,[]
 1495706445,2017-05-25T10:00:45.640Z,/sevilla,dev2,device,pressure,Integer,801,[]
 1495706445,2017-05-25T10:00:45.640Z,/sevilla,dev2,device,temperature,Float,30,[]
+```
+
+[Top](#iotp-bigdata-resources)
+
+### BasicAnalysis
+Performs a basic analysis on Json-like data within HDFS files representing
+NGSI-like data. Such data is expected to be in the format
+[Cygnus](https://github.com/telefonicaid/fiware-cygnus) tool writes in HDFS. As
+a reminder, Cygnus tool is able to write NGSI data in the following two formats:
+* Row format: a Json document is written for each entity's attribute.
+* Column format: a single Json document is written for all entity's attributes.
+
+Analysis performed depends on the type of the data to be analyzed:
+* Numeric data: minimum, maximum, sum, square root of the sum and total records
+count is computed for each entity's attribute in a specific FIWARE service path
+(check [here]() for more details on FIWARE service paths).
+* String data: per value count and total record count is computed for each
+entity's attribute in a specific FIWARE service path.
+* Boolean data: and, or, per value count and total record count is computed for
+each entity's attribute in a specific FIWARE service path.
+
+Parameters:
+* HDFS input directory.
+* HDFS output directory (must not exist, it is created by the job).
+* Data format according to Cygnus specification (row or column).
+
+For instance, given this HDFS content (Cygnus row format for HDFS):
+
+```
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":801,"attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":30,"attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":false,"attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":true,"attrMd":[]}
+```
+
+The result of the `BasicAnalysis` MapReduce job is:
+
+```
+{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev1","analysis":{"or":true,"and":false,"counts":{"false":1,"true":1},"numRecords":2},"attrName":"presence","attrType":"Boolean"}
+{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev1","analysis":{"counts":{"709":1,"800":1},"numRecords":2},"attrName":"pressure","attrType":"Integer"}
+{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev1","analysis":{"counts":{"23":1,"30":1},"numRecords":2},"attrName":"temperature","attrType":"Float"}
+{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev2","analysis":{"sum2":641601,"min":801,"max":801,"numRecords":1,"sum":801},"attrName":"pressure","attrType":"Integer"}
+{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev2","analysis":{"sum2":900,"min":30,"max":30,"numRecords":1,"sum":30},"attrName":"temperature","attrType":"Float"}
 ```
 
 [Top](#iotp-bigdata-resources)
