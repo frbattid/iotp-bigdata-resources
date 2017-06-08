@@ -130,12 +130,10 @@ public class BasicAnalysis extends Configured implements Tool {
                 jsonAnalysis.put("attrName", jsonRecord.get("attrName"));
                 jsonAnalysis.put("attrType", jsonRecord.get("attrType"));
                 jsonAnalysis.put("analysis", analysis);
-                System.err.println("initializing " + jsonAnalysis.toJSONString() + " --- " + attrValue);
                 initializeAnalysis(analysis, attrValue);
             } else {
                 JSONObject analysis = (JSONObject) jsonAnalysis.get("analysis");
                 analysis.put("numRecords", (Integer) analysis.get("numRecords") + 1);
-                System.err.println("updating " + jsonAnalysis.toJSONString() + " --- " + attrValue);
                 updateAnalysis(analysis, attrValue);
             } // if else
         } // analyzeRowFormat
@@ -146,9 +144,7 @@ public class BasicAnalysis extends Configured implements Tool {
         } // isAttrValue
         
         private void analyzeColumnFormat(JSONObject jsonRecord, JSONObject jsonAnalysis) {
-            System.err.println("start");
             if (jsonAnalysis.isEmpty()) {
-                System.err.println("is empty");
                 JSONObject analysis = new JSONObject();
                 analysis.put("numRecords", 1);
                 jsonAnalysis.put("fiwareServicePath", jsonRecord.get("fiwareServicePath"));
@@ -160,7 +156,6 @@ public class BasicAnalysis extends Configured implements Tool {
 
                 while (it.hasNext()) {
                     String field = (String) it.next();
-                    System.err.println("field " + field);
                     
                     if (isAttrValue(field)) {
                         Object attrValue = (Object) jsonRecord.get(field);
@@ -174,9 +169,7 @@ public class BasicAnalysis extends Configured implements Tool {
                         initializeAnalysis(fieldAnalysis, attrValue);
                     } // if
                 } // while
-                System.err.println("fin is empty");
             } else {
-                System.err.println("is not empty");
                 JSONObject analysis = (JSONObject) jsonAnalysis.get("analysis");
                 analysis.put("numRecords", (Integer) analysis.get("numRecords") + 1);
                 
@@ -184,7 +177,6 @@ public class BasicAnalysis extends Configured implements Tool {
 
                 while (it.hasNext()) {
                     String field = (String) it.next();
-                    System.err.println("field " + field);
                     
                     if (isAttrValue(field)) {
                         Object attrValue = (Object) jsonRecord.get(field);
@@ -198,9 +190,7 @@ public class BasicAnalysis extends Configured implements Tool {
                         updateAnalysis(fieldAnalysis, attrValue);
                     } // if
                 } // while
-                System.err.println("fin is not empty");
             } // if else
-            System.err.println("end");
         } // analyzeColumnFormat
 
         @Override
@@ -208,7 +198,6 @@ public class BasicAnalysis extends Configured implements Tool {
             JSONObject jsonAnalysis = new JSONObject();
             
             for (Text record : records) {
-                System.err.println("analyzing (k,v): " + key + " --- " + record);
                 JSONObject jsonRecord = Utils.parseRecord(record);
 
                 switch (attrsFormat) {
