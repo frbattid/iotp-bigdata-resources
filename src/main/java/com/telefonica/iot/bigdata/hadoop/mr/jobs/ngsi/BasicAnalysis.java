@@ -130,10 +130,12 @@ public class BasicAnalysis extends Configured implements Tool {
                 jsonAnalysis.put("attrName", jsonRecord.get("attrName"));
                 jsonAnalysis.put("attrType", jsonRecord.get("attrType"));
                 jsonAnalysis.put("analysis", analysis);
-                initializeAnalysis(jsonAnalysis, attrValue);
+                System.err.println("initializing " + jsonAnalysis.toJSONString() + " --- " + attrValue);
+                initializeAnalysis(analysis, attrValue);
             } else {
                 JSONObject analysis = (JSONObject) jsonAnalysis.get("analysis");
                 analysis.put("numRecords", (Integer) analysis.get("numRecords") + 1);
+                System.err.println("updating " + jsonAnalysis.toJSONString() + " --- " + attrValue);
                 updateAnalysis(analysis, attrValue);
             } // if else
         } // analyzeRowFormat
@@ -206,6 +208,7 @@ public class BasicAnalysis extends Configured implements Tool {
             JSONObject jsonAnalysis = new JSONObject();
             
             for (Text record : records) {
+                System.err.println("analyzing (k,v): " + key + " --- " + record);
                 JSONObject jsonRecord = Utils.parseRecord(record);
 
                 switch (attrsFormat) {
