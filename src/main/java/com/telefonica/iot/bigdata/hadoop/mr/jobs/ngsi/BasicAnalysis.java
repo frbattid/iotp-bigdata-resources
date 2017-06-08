@@ -15,7 +15,7 @@
  *
  * For those usages not covered by the GNU Affero General Public License please contact with iot_support at tid dot es
  */
-package com.telefonica.iot.bigdata.hadoop.mr.ngsi;
+package com.telefonica.iot.bigdata.hadoop.mr.jobs.ngsi;
 
 import com.telefonica.iot.bigdata.hadoop.mr.mappers.KeyGenerator;
 import com.telefonica.iot.bigdata.utils.Utils;
@@ -271,7 +271,7 @@ public class BasicAnalysis extends Configured implements Tool {
         System.out.println();
         System.out.println("hadoop jar \\");
         System.out.println("   iotp-bigdata-resources-0.1.0.jar \\");
-        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.BasicAnalysis \\");
+        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.jobs.ngsi.BasicAnalysis \\");
         System.out.println("   <HDFS input dir> \\");
         System.out.println("   <HDFS output dir> \\");
         System.out.println("   <attrs format>");

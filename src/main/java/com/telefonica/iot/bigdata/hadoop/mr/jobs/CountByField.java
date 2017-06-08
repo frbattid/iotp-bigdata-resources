@@ -15,7 +15,7 @@
  *
  * For those usages not covered by the GNU Affero General Public License please contact with iot_support at tid dot es
  */
-package com.telefonica.iot.bigdata.hadoop.mr;
+package com.telefonica.iot.bigdata.hadoop.mr.jobs;
 
 import com.telefonica.iot.bigdata.hadoop.mr.combiners.RecordsCombiner;
 import com.telefonica.iot.bigdata.hadoop.mr.mappers.IdentityMapper;
@@ -24,7 +24,6 @@ import java.util.HashMap;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
@@ -136,7 +135,7 @@ public class CountByField extends Configured implements Tool {
         System.out.println();
         System.out.println("hadoop jar \\");
         System.out.println("   iotp-bigdata-resources-0.1.0.jar \\");
-        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.CountByField \\");
+        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.jobs.CountByField \\");
         System.out.println("   <HDFS input dir> \\");
         System.out.println("   <HDFS output dir> \\");
         System.out.println("   <field>");

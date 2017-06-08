@@ -15,7 +15,7 @@
  *
  * For those usages not covered by the GNU Affero General Public License please contact with iot_support at tid dot es
  */
-package com.telefonica.iot.bigdata.hadoop.mr;
+package com.telefonica.iot.bigdata.hadoop.mr.jobs;
 
 import com.telefonica.iot.bigdata.hadoop.mr.combiners.RecordsCombiner;
 import com.telefonica.iot.bigdata.hadoop.mr.reducers.RecordsJoiner;
@@ -185,7 +185,7 @@ public class FilterRecord extends Configured implements Tool {
         System.out.println();
         System.out.println("hadoop jar \\");
         System.out.println("   iotp-bigdata-resources-0.1.0.jar \\");
-        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.FilterRecord \\");
+        System.out.println("   com.telefonica.iot.bigdata.hadoop.mr.jobs.FilterRecord \\");
         System.out.println("   <HDFS input dir> \\");
         System.out.println("   <HDFS output dir> \\");
         System.out.println("   <query>");
