@@ -117,12 +117,12 @@ for all the fields not having a specific aggregation criteria.
 For instance, given this HDFS content:
 
 ```
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
 ```
 
 And this aggregation criteria:
@@ -131,7 +131,7 @@ And this aggregation criteria:
 
 The the result of the `Aggregate` MapReduce job is:
 
-    {"recvTime":"2017-05-25T09:54:58.427Z","entityType":"device","attrMd":[],"fiwareServicePath":"/sevilla","entityId":"dev1","recvTimeTs":"1495706098","attrValue":"30","attrName":"temperature","attrType":"Float"}
+    {"recvTime":"2017-05-25T09:54:58.427Z","entityType":"device","attrMd":[],"fiwareServicePath":"/test","entityId":"dev1","recvTimeTs":"1495706098","attrValue":"30","attrName":"temperature","attrType":"Float"}
 
 [Top](#iotp-bigdata-resources)
 
@@ -150,12 +150,12 @@ The list of name mappings is a collection of pairs containing the old name and t
 For instance, given this HDFS content:
 
 ```
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
 ```
 
 And these name mappings:
@@ -165,12 +165,12 @@ And these name mappings:
 The the result of the `Aggregate` MapReduce job is:
 
 ```
-{"ms":"1495706098","ts":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
-{"ms":"1495706098","ts":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
-{"ms":"1495706357","ts":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
-{"ms":"1495706357","ts":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
-{"ms":"1495706445","ts":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
-{"ms":"1495706445","ts":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"ms":"1495706098","ts":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"ms":"1495706098","ts":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"ms":"1495706357","ts":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"ms":"1495706357","ts":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"ms":"1495706445","ts":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"ms":"1495706445","ts":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
 ```
 
 [Top](#iotp-bigdata-resources)
@@ -208,12 +208,12 @@ used, i.e. `_rest_`.
 For instance, given this HDFS content:
 
 ```
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
 ```
 
 If the filed used as key is `entityId` then the result of the `CountById`
@@ -238,12 +238,12 @@ The list of fields to be filtered is concatenated with `&`, i.e.:
 For instance, given this HDFS content:
 
 ```
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
 ```
 
 And this list of fields:
@@ -287,12 +287,12 @@ The same field may appear more than once in the conditions.
 For instance, given this HDFS content:
 
 ```
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
 ```
 
 And this list of filtering conditions:
@@ -302,8 +302,8 @@ And this list of filtering conditions:
 Then the result of the `FilterRecord` MapReduce job is:
 
 ```
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
 ```
 
 [Top](#iotp-bigdata-resources)
@@ -319,23 +319,23 @@ Parameters:
 For instance, given this HDFS content:
 
 ```
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"801","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
 ```
 
 The result of the `Json2CSV` MapReduce job is:
 
 ```
-1495706098,2017-05-25T09:54:58.427Z,/sevilla,dev1,device,temperature,Float,23,[]
-1495706098,2017-05-25T09:54:58.427Z,/sevilla,dev1,device,pressure,Integer,709,[]
-1495706357,2017-05-25T09:59:17.488Z,/sevilla,dev1,device,pressure,Integer,800,[]
-1495706357,2017-05-25T09:59:17.488Z,/sevilla,dev1,device,temperature,Float,30,[]
-1495706445,2017-05-25T10:00:45.640Z,/sevilla,dev2,device,pressure,Integer,801,[]
-1495706445,2017-05-25T10:00:45.640Z,/sevilla,dev2,device,temperature,Float,30,[]
+1495706098,2017-05-25T09:54:58.427Z,/test,dev1,device,temperature,Float,23,[]
+1495706098,2017-05-25T09:54:58.427Z,/test,dev1,device,pressure,Integer,709,[]
+1495706357,2017-05-25T09:59:17.488Z,/test,dev1,device,pressure,Integer,800,[]
+1495706357,2017-05-25T09:59:17.488Z,/test,dev1,device,temperature,Float,30,[]
+1495706445,2017-05-25T10:00:45.640Z,/test,dev2,device,pressure,Integer,801,[]
+1495706445,2017-05-25T10:00:45.640Z,/test,dev2,device,temperature,Float,30,[]
 ```
 
 [Top](#iotp-bigdata-resources)
@@ -365,24 +365,24 @@ Parameters:
 For instance, given this HDFS content (Cygnus row format for HDFS):
 
 ```
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
-{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":801,"attrMd":[]}
-{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/sevilla","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":30,"attrMd":[]}
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":false,"attrMd":[]}
-{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/sevilla","entityId":"dev1","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":true,"attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"709","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"800","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"30","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":801,"attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":30,"attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":false,"attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"presence","attrType":"Boolean","attrValue":true,"attrMd":[]}
 ```
 
 The result of the `BasicAnalysis` MapReduce job is:
 
 ```
-{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev1","analysis":{"or":true,"and":false,"counts":{"false":1,"true":1},"numRecords":2},"attrName":"presence","attrType":"Boolean"}
-{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev1","analysis":{"counts":{"709":1,"800":1},"numRecords":2},"attrName":"pressure","attrType":"Integer"}
-{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev1","analysis":{"counts":{"23":1,"30":1},"numRecords":2},"attrName":"temperature","attrType":"Float"}
-{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev2","analysis":{"sum2":641601,"min":801,"max":801,"numRecords":1,"sum":801},"attrName":"pressure","attrType":"Integer"}
-{"entityType":"device","fiwareServicePath":"\/sevilla","entityId":"dev2","analysis":{"sum2":900,"min":30,"max":30,"numRecords":1,"sum":30},"attrName":"temperature","attrType":"Float"}
+{"entityType":"device","fiwareServicePath":"\/test","entityId":"dev1","analysis":{"or":true,"and":false,"counts":{"false":1,"true":1},"numRecords":2},"attrName":"presence","attrType":"Boolean"}
+{"entityType":"device","fiwareServicePath":"\/test","entityId":"dev1","analysis":{"counts":{"709":1,"800":1},"numRecords":2},"attrName":"pressure","attrType":"Integer"}
+{"entityType":"device","fiwareServicePath":"\/test","entityId":"dev1","analysis":{"counts":{"23":1,"30":1},"numRecords":2},"attrName":"temperature","attrType":"Float"}
+{"entityType":"device","fiwareServicePath":"\/test","entityId":"dev2","analysis":{"sum2":641601,"min":801,"max":801,"numRecords":1,"sum":801},"attrName":"pressure","attrType":"Integer"}
+{"entityType":"device","fiwareServicePath":"\/test","entityId":"dev2","analysis":{"sum2":900,"min":30,"max":30,"numRecords":1,"sum":30},"attrName":"temperature","attrType":"Float"}
 ```
 
 [Top](#iotp-bigdata-resources)
