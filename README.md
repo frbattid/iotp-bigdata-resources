@@ -73,6 +73,8 @@ class names, or FQCN, are given):
 * [`com.telefonica.iot.bigdata.hadoop.mr.jobs.FilterRecord`](#filterrecord)
 * [`com.telefonica.iot.bigdata.hadoop.mr.jobs.Json2CSV`](#json2csv)
 * [`com.telefonica.iot.bigdata.hadoop.mr.jobs.ngsi.BasicAnalysis`](#basicanalysis)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.ngsi.FromRowToColumn`](#fromrowtocolumn)
+* [`com.telefonica.iot.bigdata.hadoop.mr.jobs.ngsi.PearsonCorrelation`](#pearsoncorrelation)
 
 Those jobs are fully executable from any Hadoop instance. Just ssh into any node
 of the cluster and run:
@@ -383,6 +385,99 @@ The result of the `BasicAnalysis` MapReduce job is:
 {"entityType":"device","fiwareServicePath":"\/test","entityId":"dev1","analysis":{"counts":{"23":1,"30":1},"numRecords":2},"attrName":"temperature","attrType":"Float"}
 {"entityType":"device","fiwareServicePath":"\/test","entityId":"dev2","analysis":{"sum2":641601,"min":801,"max":801,"numRecords":1,"sum":801},"attrName":"pressure","attrType":"Integer"}
 {"entityType":"device","fiwareServicePath":"\/test","entityId":"dev2","analysis":{"sum2":900,"min":30,"max":30,"numRecords":1,"sum":30},"attrName":"temperature","attrType":"Float"}
+```
+
+[Top](#iotp-bigdata-resources)
+
+## FromRowToColumn
+Json-like data within HDFS files representing NGSI-like data is expected to be
+in the format [Cygnus](https://github.com/telefonicaid/fiware-cygnus) tool
+writes in HDFS. As a reminder, Cygnus tool is able to write NGSI data in the
+following two formats:
+* Row format: a Json document is written for each entity's attribute.
+* Column format: a single Json document is written for all entity's attributes.
+
+`FromRowToColumn` converts from row format to column format NGSI-like data
+within HDFS files.
+
+Parameters:
+* HDFS input directory.
+* HDFS output directory (must not exist, it is created by the job).
+
+For instance, given this HDFS content (Cygnus row format for HDFS):
+
+```
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"23.1","attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"89","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"90","attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"24.2","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"89","attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"24.0","attrMd":[]}
+{"recvTimeTs":"1495707186","recvTime":"2017-05-25T10:13:06.3Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"91","attrMd":[]}
+{"recvTimeTs":"1495707186","recvTime":"2017-05-25T10:13:06.3Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"22.7","attrMd":[]}
+{"recvTimeTs":"1495717112","recvTime":"2017-05-25T12:58:32.539Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"88","attrMd":[]}
+{"recvTimeTs":"1495717112","recvTime":"2017-05-25T12:58:32.539Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"22.0","attrMd":[]}
+{"recvTimeTs":"1495718903","recvTime":"2017-05-25T13:05:12.67Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":"90","attrMd":[]}
+{"recvTimeTs":"1495718903","recvTime":"2017-05-25T13:05:12.67Z","fiwareServicePath":"/test","entityId":"dev3","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":"22.7","attrMd":[]}
+```
+
+The result of the `FromRowToColumn` MapReduce job is:
+
+```
+{"recvTime":"2017-05-25T09:54:58.427Z","pressure_md":[],"temperature_md":[],"entityType":"device","temperature":"23.1","fiwareServicePath":"\/test","entityId":"dev1","pressure":"89"}
+{"recvTime":"2017-05-25T10:00:45.640Z","pressure_md":[],"temperature_md":[],"entityType":"device","temperature":"24.0","fiwareServicePath":"\/test","entityId":"dev1","pressure":"89"}
+{"recvTime":"2017-05-25T12:58:32.539Z","pressure_md":[],"temperature_md":[],"entityType":"device","temperature":"22.0","fiwareServicePath":"\/test","entityId":"dev1","pressure":"88"}
+{"recvTime":"2017-05-25T09:59:17.488Z","pressure_md":[],"temperature_md":[],"entityType":"device","temperature":"24.2","fiwareServicePath":"\/test","entityId":"dev2","pressure":"90"}
+{"recvTime":"2017-05-25T10:13:06.3Z","pressure_md":[],"temperature_md":[],"entityType":"device","temperature":"22.7","fiwareServicePath":"\/test","entityId":"dev3","pressure":"91"}
+{"recvTime":"2017-05-25T13:05:12.67Z","pressure_md":[],"temperature_md":[],"entityType":"device","temperature":"22.7","fiwareServicePath":"\/test","entityId":"dev3","pressure":"90"}
+```
+
+[Top](#iotp-bigdata-resources)
+
+## PearsonCorrelation
+Computes [Pearson correlation coefficients](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) between all pair combinations of measures within Json-like data within HDFS
+files representing NGSI-like data. Such data is expected to be in [Cygnus](https://github.com/telefonicaid/fiware-cygnus)'s
+column format. As a reminder, Cygnus tool is able to write NGSI data in
+the following two formats:
+* Row format: a Json document is written for each entity's attribute.
+* Column format: a single Json document is written for all entity's attributes.
+
+If original data does not follows the column format, it is temporarily
+converted to column format before computing Pearson correlation indexes.
+
+It must be noticed the sampled formula for Pearson correlation coefficients is
+suited for a number of samples equals or greater than 3. Samples of length 1 or
+2 will lead to `null` coefficients.
+
+Parameters:
+* HDFS input directory.
+* HDFS output directory (must not exist, it is created by the job).
+* Data format according to Cygnus specification (row or column).
+
+For instance, given this HDFS content (Cygnus row format for HDFS):
+
+```
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":23.1,"attrMd":[]}
+{"recvTimeTs":"1495706098","recvTime":"2017-05-25T09:54:58.427Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":89,"attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":90,"attrMd":[]}
+{"recvTimeTs":"1495706357","recvTime":"2017-05-25T09:59:17.488Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":20.2,"attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":89,"attrMd":[]}
+{"recvTimeTs":"1495706445","recvTime":"2017-05-25T10:00:45.640Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":24.0,"attrMd":[]}
+{"recvTimeTs":"1495707186","recvTime":"2017-05-25T10:13:06.3Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":91,"attrMd":[]}
+{"recvTimeTs":"1495707186","recvTime":"2017-05-25T10:13:06.3Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":19.7,"attrMd":[]}
+{"recvTimeTs":"1495717112","recvTime":"2017-05-25T12:58:32.539Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":88,"attrMd":[]}
+{"recvTimeTs":"1495717112","recvTime":"2017-05-25T12:58:32.539Z","fiwareServicePath":"/test","entityId":"dev1","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":22.0,"attrMd":[]}
+{"recvTimeTs":"1495718903","recvTime":"2017-05-25T13:05:12.67Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"pressure","attrType":"Integer","attrValue":90,"attrMd":[]}
+{"recvTimeTs":"1495718903","recvTime":"2017-05-25T13:05:12.67Z","fiwareServicePath":"/test","entityId":"dev2","entityType":"device","attrName":"temperature","attrType":"Float","attrValue":28.7,"attrMd":[]}
+```
+
+The result of the `PearsonCorrelation` MapReduce job is:
+
+```
+{"entityType":"device","fiwareServicePath":"\/test","entityId":"dev1","analysis":{"x":"pressure","y":"temperature","numRecords":3.0,"pearsonCorrelation":0.8934051474410694}}
+{"entityType":"device","fiwareServicePath":"\/test","entityId":"dev1","analysis":{"x":"temperature","y":"pressure","numRecords":3.0,"pearsonCorrelation":0.8934051474410694}}
+{"entityType":"device","fiwareServicePath":"\/test","entityId":"dev2","analysis":{"x":"pressure","y":"temperature","numRecords":3.0,"pearsonCorrelation":-0.5421936382579835}}
+{"entityType":"device","fiwareServicePath":"\/test","entityId":"dev2","analysis":{"x":"temperature","y":"pressure","numRecords":3.0,"pearsonCorrelation":-0.5421936382579835}}
 ```
 
 [Top](#iotp-bigdata-resources)
